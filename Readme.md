@@ -1,0 +1,1 @@
+Olá, este é um pequeno script feito para baixar playlists em python com pequeno esforço.
