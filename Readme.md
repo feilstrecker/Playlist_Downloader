@@ -1,11 +1,6 @@
-    This script downloads playlists of Youtube.
+This script downloads playlists of Youtube.
 
-"""""""""""""""""""""""""""
-""""""" ATTENTION """""""""
-"""""""""""""""""""""""""""
+# requirements:
+    If you don't like GUI, and have Python and Pytube installed, run 'main.py'
+    else you like or don't have the requirements, run 'gui.exe', it code is in 'gui.py'
 
-    Pytube is having problems for install with pip, so, i recommend you, for download in oficcial github
-    and putting on the path.
-
-
-# requirements: python3 and pytube library 
