@@ -73,7 +73,7 @@ class GUI():
                         except (FileExistsError):
                             self.update(f'You already download:\n{ys.title}')
 
-                    self.update('Sucessful download.')
+                    self.update('Successful download.')
 
             elif button == WIN_CLOSED: # Break
                 break
