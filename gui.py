@@ -51,27 +51,28 @@ class GUI():
 
                     # Take url by url and downloading them
                     for url in self.playlist.video_urls:
-                        counter +=1
-                        ys = YouTube(url)
-                        self.update(f"Downloading ({counter}/{len(self.playlist)})"
-                                    f'\nTitle: {ys.title}'
-                        
-                        )
-
-                        # 'try' for if have a chance from music already downloaded
                         try:
-                            # Getting audio only
-                            v = ys.streams.get_audio_only()
+                            counter +=1
+                            ys = YouTube(url)
+                            self.update(f"Downloading ({counter}/{len(self.playlist)})"
+                                        f'\nTitle: {ys.title}'
+                            
+                            )
 
-                            self.check_path(ys.title)
-                            # Transform the mp4 for mp3 and saving in the path 'musics'
+                            v = ys.streams.get_audio_only()
                             out_file = v.download(output_path=f"musics")
                             base, ext = os.path.splitext(out_file)
+                            base = self.clean_archiver_name(base)
                             new_file = base + '.mp3'
+
+                            # Transform the mp4 for mp3 and saving in the path 'musics'
                             os.rename(out_file, new_file)
                             os.system('cls') 
-                        except (FileExistsError):
+                            
+                        except FileExistsError:
                             self.update(f'You already download:\n{ys.title}')
+                            os.remove(out_file)
+                            
 
                     self.update('Successful download.')
 
@@ -80,16 +81,20 @@ class GUI():
         
         # Close aplicattion
         self.window.close()
-
+    
+    def clean_archiver_name(self, name):
+        name = name.replace('.', '')
+        
+        return name
     # Check if already have the path of the music.
     def check_path(self, archiver_path):
         try:
-            with open(f'musics\\{archiver_path}.mp3') as msc:
-                raise(FileExistsError) # Raise FileExistsError for pass this download
+            with open(f'musics\\{archiver_path}') as msc:
+                return True
         
         # If don't have, don't raise error
-        except FileNotFoundError:
-            pass
+        except Exception:
+            return False
 
     # Update the print of GUI
     def update(self, text):
